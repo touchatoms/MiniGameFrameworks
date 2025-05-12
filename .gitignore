@@ -122,7 +122,6 @@ DistributionSummary.plist
 !Game/GameEx_Project.csproj
 
 diff/
-HybridCLRData/LocalIl2CppData-OSXEditor/*
-HybridCLRData/AssembliesPostIl2CppStrip/*
-HybridCLRData/StrippedAOTDllsTempProj/*
+HybridCLRData/*
 MacApp_BackUpThisFolder_ButDontShipItWithYourGame/*
+
