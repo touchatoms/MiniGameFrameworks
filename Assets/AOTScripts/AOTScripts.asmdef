@@ -1,0 +1,21 @@
+{
+    "name": "AOTScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e34a5702dd353724aa315fb8011f08c3",
+        "GUID:c58e12c45b50087489b06b9aa0148fe7",
+        "GUID:f22fac247a56d2d41b687bb0d900e54e",
+        "GUID:c55575a9f1747c240822f4b7e0400716",
+        "GUID:1ea6b676786131e4095182b742bb64ec",
+        "GUID:772718a2894974973be5f19f2bc39677"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
