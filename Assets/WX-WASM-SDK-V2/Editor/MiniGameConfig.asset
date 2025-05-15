@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: MiniGameConfig
   m_EditorClassIdentifier: 
   ProjectConf:
-    projectName: smallLearn
-    Appid: wxc18b1304648e1981
-    CDN: http://192.168.0.115:8080/webgl/
+    projectName: HybridCLR-Test
+    Appid: wx6743df1cf8c236f6
+    CDN: http://192.168.0.189:8080/webgl/
     assetLoadType: 0
-    compressDataPackage: 1
+    compressDataPackage: 0
     VideoUrl: 
-    DST: /Users/lipengpeng/Documents/Unity/UnityMiniGames/client_sanguo/Outputs/WebGlPackage
+    DST: /Users/pimingzhen/Works/Current/DEMO/MotionFrameworkProjects/HybridCLR-Test/Outputs
     StreamCDN: 
     bundleHashLength: 32
     bundlePathIdentifier: StreamingAssets;
@@ -45,6 +45,7 @@ MonoBehaviour:
     UseCompressedTexture: 0
     UseMiniGameChat: 0
     PreloadWXFont: 0
+    disableMultiTouch: 0
   CompileOptions:
     DevelopBuild: 0
     AutoProfile: 0
@@ -57,13 +58,15 @@ MonoBehaviour:
     ProfilingMemory: 0
     CleanBuild: 0
     CustomNodePath: 
-    autoAdaptScreen: 1
-    showMonitorSuggestModal: 0
+    autoAdaptScreen: 0
+    showMonitorSuggestModal: 1
     enableProfileStats: 0
     enableRenderAnalysis: 0
+    enablePerfAnalysis: 0
     iOSAutoGCInterval: 10000
     enableIOSPerformancePlus: 0
-    brotliMT: 1
+    brotliMT: 0
+    enableWasm2023: 0
   CompressTexture:
     halfSize: 0
     useDXT5: 0
@@ -72,7 +75,7 @@ MonoBehaviour:
     bundleDir: 
     dstMinDir: 
     debugMode: 0
-    force: 1
+    force: 0
   PlayerPrefsKeys: []
   FontOptions:
     CJK_Unified_Ideographs: 1

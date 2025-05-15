@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import moduleHelper from './module-helper';
 import { ResType } from './resType';
 import { ResTypeOther } from './resTypeOther';
@@ -11,6 +12,8 @@ function realUid(length = 20, char = true) {
     }
     return id.join('');
 }
+// 用于调试js代码
+const isDebug = false;
 const identifierCache = [];
 const clearIdTicker = {};
 const tempCacheObj = {};
@@ -21,7 +24,7 @@ const typeMap = {
     number: 0,
     bool: false,
     object: {},
-};
+}; // 类型默认值映射
 const interfaceTypeMap = {
     array: 'object',
     arrayBuffer: 'object',
@@ -106,6 +109,9 @@ export function formatResponse(type, data, id) {
         else if (conf[key] === 'string' && typeof data[key] === 'number') {
             data[key] = `${data[key]}`;
         }
+        else if (conf[key] === 'string' && typeof data[key] === 'object') {
+            data[key] = JSON.stringify(data[key]);
+        }
         else if (conf[key] === 'bool' && (typeof data[key] === 'number' || typeof data[key] === 'string')) {
             data[key] = !!data[key];
         }
@@ -171,6 +177,9 @@ export function formatResponse(type, data, id) {
             }
         }
     });
+    if ((type === 'SystemInfo' || type === 'WindowInfo') && data.pixelRatio) {
+        data.pixelRatio = window.devicePixelRatio;
+    }
     return data;
 }
 export function formatJsonStr(str, type) {
@@ -369,4 +378,31 @@ export function stringifyRes(obj) {
         return '{}';
     }
     return JSON.stringify(obj);
+}
+export function getDefaultData(canvas, conf) {
+    const config = formatJsonStr(conf);
+    if (typeof config.x === 'undefined') {
+        config.x = 0;
+    }
+    if (typeof config.y === 'undefined') {
+        config.y = 0;
+    }
+    if (typeof config.width === 'undefined' || config.width === 0) {
+        config.width = canvas.width;
+    }
+    if (typeof config.height === 'undefined' || config.height === 0) {
+        config.height = canvas.height;
+    }
+    if (typeof config.destWidth === 'undefined' || config.destWidth === 0) {
+        config.destWidth = canvas.width;
+    }
+    if (typeof config.destHeight === 'undefined' || config.destHeight === 0) {
+        config.destHeight = canvas.height;
+    }
+    return config;
+}
+export function debugLog(...args) {
+    if (isDebug) {
+        console.log('[debug]', ...args);
+    }
 }

@@ -10,6 +10,8 @@ export const resumeWebAudio = () => {
     
     
     WEBAudio.audioContext?.resume();
+    GameGlobal.Module.mContext?.resume();
+    GameGlobal.Module.context?.resume();
 };
 export const createInnerAudio = () => {
     const id = uid();
@@ -45,7 +47,7 @@ export const destroyInnerAudio = (id, useCache) => {
         Object.keys(state).forEach((key) => {
             try {
                 
-                
+                // @ts-ignore
                 audios[id][key] = state[key];
             }
             catch (e) { }

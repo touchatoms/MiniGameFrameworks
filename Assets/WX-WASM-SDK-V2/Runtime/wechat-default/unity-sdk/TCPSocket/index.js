@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { formatJsonStr, uid, onEventCallback, offEventCallback, getListObject, convertInfoToPointer, formatResponse, convertDataToPointer } from '../utils';
 const TCPSocketList = {};
 const wxTCPSocketBindWifiList = {};
@@ -8,7 +9,7 @@ const wxTCPSocketMessageList = {};
 const getTCPSocketObject = getListObject(TCPSocketList, 'TCPSocket');
 let wxTCPSocketOnMessageCallback;
 function WX_CreateTCPSocket() {
-    const obj = wx.createTCPSocket();
+    const obj = wx.createTCPSocket({ type: 'ipv4' });
     const key = uid();
     TCPSocketList[key] = obj;
     return key;

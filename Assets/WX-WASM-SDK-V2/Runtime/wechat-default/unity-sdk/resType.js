@@ -1,4 +1,11 @@
 export const ResType = {
+    Gamepad: {
+        axes: 'IAnyObject[]',
+        buttons: 'IAnyObject[]',
+        connected: 'bool',
+        id: 'string',
+        index: 'string',
+    },
     AccountInfo: {
         miniProgram: 'MiniProgram',
         plugin: 'Plugin',
@@ -28,6 +35,8 @@ export const ResType = {
     AppBaseInfo: {
         SDKVersion: 'string',
         enableDebug: 'bool',
+        fontSizeScaleFactor: 'number',
+        fontSizeSetting: 'number',
         host: 'AppBaseInfoHost',
         language: 'string',
         version: 'string',
@@ -38,6 +47,7 @@ export const ResType = {
     },
     GetBatteryInfoSyncResult: {
         isCharging: 'bool',
+        isLowPowerModeEnabled: 'bool',
         level: 'number',
     },
     DeviceInfo: {
@@ -186,6 +196,7 @@ export const ResType = {
         socketReused: 'bool',
         throughputKbps: 'number',
         transportRttEstimate: 'number',
+        usingHighPerformanceMode: 'bool',
     },
     DownloadTaskOnHeadersReceivedListenerResult: {
         header: 'object',
@@ -203,17 +214,17 @@ export const ResType = {
     },
     OptionStyle: {
         backgroundColor: 'string',
+        height: 'number',
+        left: 'number',
+        top: 'number',
+        width: 'number',
         borderColor: 'string',
         borderRadius: 'number',
         borderWidth: 'number',
         color: 'string',
         fontSize: 'number',
-        height: 'number',
-        left: 'number',
         lineHeight: 'number',
         textAlign: 'string',
-        top: 'number',
-        width: 'number',
     },
     ImageData: {
         height: 'number',
@@ -446,6 +457,7 @@ export const ResType = {
     },
     GetBatteryInfoSuccessCallbackResult: {
         isCharging: 'bool',
+        isLowPowerModeEnabled: 'bool',
         level: 'number',
         errMsg: 'string',
     },
@@ -491,7 +503,7 @@ export const ResType = {
         headUrl: 'string',
         nickname: 'string',
         nonceId: 'string',
-        otherInfos: 'AnyKeyword[]',
+        otherInfos: 'any[]',
         replayStatus: 'number',
         status: 'number',
         errMsg: 'string',
@@ -500,7 +512,7 @@ export const ResType = {
         headUrl: 'string',
         nickname: 'string',
         noticeId: 'string',
-        otherInfos: 'AnyKeyword[]',
+        otherInfos: 'any[]',
         reservable: 'bool',
         startTime: 'string',
         status: 'number',
@@ -517,6 +529,11 @@ export const ResType = {
     BluetoothDeviceInfo: {
         deviceId: 'string',
         name: 'string',
+    },
+    GetDeviceBenchmarkInfoSuccessCallbackResult: {
+        benchmarkLevel: 'number',
+        modelLevel: 'number',
+        errMsg: 'string',
     },
     GetExtConfigSuccessCallbackResult: {
         extConfig: 'object',
@@ -538,6 +555,10 @@ export const ResType = {
         signature: 'string',
         errMsg: 'string',
     },
+    GetGroupEnterInfoError: {
+        errMsg: 'string',
+        errCode: 'number',
+    },
     GetGroupEnterInfoSuccessCallbackResult: {
         cloudID: 'string',
         encryptedData: 'string',
@@ -557,7 +578,13 @@ export const ResType = {
         hasSystemProxy: 'bool',
         networkType: 'string',
         signalStrength: 'number',
+        weakNet: 'bool',
         errMsg: 'string',
+    },
+    GetPhoneNumberSuccessCallbackResult: {
+        code: 'string',
+        errMsg: 'string',
+        errno: 'number',
     },
     GetPrivacySettingSuccessCallbackResult: {
         needAuthorization: 'bool',
@@ -582,6 +609,10 @@ export const ResType = {
     SubscriptionsSetting: {
         mainSwitch: 'bool',
         itemSettings: 'object',
+    },
+    GetShowSplashAdStatusSuccessCallbackResult: {
+        status: 'string',
+        errMsg: 'string',
     },
     GetStorageInfoSuccessCallbackOption: {
         currentSize: 'number',
@@ -709,6 +740,12 @@ export const ResType = {
         message: 'string',
         stack: 'string',
     },
+    OnGamepadConnectedListenerResult: {
+        gamepad: 'string',
+    },
+    OnGamepadDisconnectedListenerResult: {
+        gamepad: 'string',
+    },
     OnHandoffListenerResult: {
         query: 'string',
     },
@@ -774,6 +811,9 @@ export const ResType = {
         promise: 'string',
         reason: 'string',
     },
+    OnUserCaptureScreenListenerResult: {
+        query: 'string',
+    },
     OnVoIPChatInterruptedListenerResult: {
         errCode: 'number',
         errMsg: 'string',
@@ -823,17 +863,6 @@ export const ResType = {
         subscriptionsSetting: 'SubscriptionsSetting',
         errMsg: 'string',
     },
-    OperateGameRecorderVideoOption: {
-        atempo: 'number',
-        audioMix: 'bool',
-        bgm: 'string',
-        desc: 'string',
-        path: 'string',
-        query: 'string',
-        timeRange: 'number[]',
-        title: 'string',
-        volume: 'number',
-    },
     MediaSource: {
         url: 'string',
         poster: 'string',
@@ -873,9 +902,23 @@ export const ResType = {
     RequestMidasPaymentFailCallbackErr: {
         errCode: 'number',
         errMsg: 'string',
+        errno: 'number',
     },
     RequestMidasPaymentSuccessCallbackResult: {
         errMsg: 'string',
+    },
+    SignData1: {
+        buyQuantity: 'number',
+        currencyType: 'string',
+        goodsPrice: 'number',
+        mode: 'string',
+        offerId: 'string',
+        outTradeNo: 'string',
+        productId: 'string',
+        attach: 'string',
+        env: 'number',
+        platform: 'string',
+        zoneId: 'string',
     },
     RequestSubscribeMessageFailCallbackResult: {
         errCode: 'number',
@@ -888,9 +931,6 @@ export const ResType = {
     RequestSubscribeSystemMessageSuccessCallbackResult: {
         anyKeyWord: 'string',
         errMsg: 'string',
-    },
-    ReserveChannelsLiveOption: {
-        noticeId: 'string',
     },
     ScanCodeSuccessCallbackResult: {
         charSet: 'string',
@@ -931,6 +971,7 @@ export const ResType = {
     },
     UpdatableMessageFrontEndTemplateInfo: {
         parameterList: 'UpdatableMessageFrontEndParameter[]',
+        templateId: 'string',
     },
     UpdatableMessageFrontEndParameter: {
         name: 'string',
@@ -962,10 +1003,6 @@ export const ResType = {
         cloudID: 'string',
         feedIdList: 'string[]',
         errMsg: 'string',
-    },
-    MidasPaymentGameItemError: {
-        errMsg: 'string',
-        errCode: 'number',
     },
     RequestSubscribeLiveActivitySuccessCallbackResult: {
         code: 'string',
