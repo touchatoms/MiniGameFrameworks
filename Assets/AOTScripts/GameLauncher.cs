@@ -12,13 +12,20 @@ using MotionFramework.Window;
 using UniFramework.Event;
 using UnityEngine;
 using YooAsset;
+using EventGroup = UniFramework.Event.EventGroup;
+using IEventMessage = UniFramework.Event.IEventMessage;
 
 public class GameLauncher : MonoBehaviour
 {
-    public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
+    public EPlayMode PlayMode = EPlayMode.HostPlayMode;
+    private PatchOperation operation = null;
+    private readonly EventGroup _eventGroup = new EventGroup();
 
     private void Awake()
     {
+        Debug.Log("Application.persistentDataPath:" + Application.persistentDataPath);
+        Debug.Log("Application.streamingAssetsPath:" + Application.streamingAssetsPath);
+        Debug.Log("Application.dataPath:" + Application.dataPath);
         // 游戏管理器
         GameManager.Instance.Behaviour = this;
 
@@ -29,9 +36,9 @@ public class GameLauncher : MonoBehaviour
 
         // 创建补间管理器
         MotionEngine.CreateModule<TweenManager>();
-        
+
         MotionEngine.CreateModule<ResourceManager>();
-        
+
         // 创建对象池管理器
         var poolCreateParam = new GameObjectPoolManager.CreateParameters();
         poolCreateParam.DefaultDestroyTime = 5f;
@@ -49,16 +56,50 @@ public class GameLauncher : MonoBehaviour
         // 创建窗口管理器
         MotionEngine.CreateModule<WindowManager>();
 
-        var operation = new PatchOperation("DefaultPackage", PlayMode);
+        _eventGroup.AddListener<PatchEventDefine.InitializeFailed>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.PatchStepsChange>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.FoundUpdateFiles>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.DownloadUpdate>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.PackageVersionRequestFailed>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.PackageManifestUpdateFailed>(OnHandleEventMessage);
+        _eventGroup.AddListener<PatchEventDefine.WebFileDownloadFailed>(OnHandleEventMessage);
+
+        operation = new PatchOperation("DefaultPackage", EPlayMode.HostPlayMode);
         YooAssets.StartOperation(operation);
     }
 
-    IEnumerator StartOperation()
+    /// <summary>
+    /// 接收事件
+    /// </summary>
+    private void OnHandleEventMessage(IEventMessage message)
     {
-        // 开始补丁更新流程
-        var operation = new PatchOperation("DefaultPackage", PlayMode);
-        YooAssets.StartOperation(operation);
-        yield return operation;
+        if (message is PatchEventDefine.InitializeFailed)
+        {
+        }
+        else if (message is PatchEventDefine.PatchStepsChange)
+        {
+        }
+        else if (message is PatchEventDefine.FoundUpdateFiles)
+        {
+        }
+        else if (message is PatchEventDefine.DownloadUpdate)
+        {
+        }
+        else if (message is PatchEventDefine.PackageVersionRequestFailed)
+        {
+        }
+        else if (message is PatchEventDefine.PackageManifestUpdateFailed)
+        {
+        }
+        else if (message is PatchEventDefine.WebFileDownloadFailed)
+        {
+        }
+        else
+        {
+            throw new System.NotImplementedException($"{message.GetType()}");
+        }
+
+        Debug.Log("message:" + message.GetType());
     }
 
     /// <summary>
@@ -85,7 +126,7 @@ public class GameLauncher : MonoBehaviour
             return $"{_fallbackHostServer}/{fileName}";
         }
     }
-    
+
     void HandleMotionFrameworkLog(ELogLevel logLevel, string log)
     {
         if (logLevel == ELogLevel.Log)
@@ -115,18 +156,5 @@ public class GameLauncher : MonoBehaviour
     void Start()
     {
         Debug.Log("GameLauncher::Start called");
-
-//         // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。
-// #if !UNITY_EDITOR
-//         Assembly hotUpdateAss =
-//  Assembly.Load(File.ReadAllBytes($"{Application.streamingAssetsPath}/HotUpdate.dll.bytes"));
-// #else
-//         // Editor下无需加载，直接查找获得HotUpdate程序集
-//         Assembly hotUpdateAss =
-//             System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
-// #endif
-//
-//         Type type = hotUpdateAss.GetType("Hello");
-//         type.GetMethod("Run")?.Invoke(null, null);
     }
 }

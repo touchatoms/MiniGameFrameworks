@@ -3,10 +3,11 @@
 
 public static class ShellConfig
 {
+    
     // 0 连接在线服务器, 1-在线确认服务器  2- 连接测试服务器, 3-本地, 4-审核
     public static int DEBUG = 0;
 
-    public static string CDN_HTTP_ORIGIN = "";
+    public static string CDN_HTTP_ORIGIN = "http://192.168.0.189:8080/StandaloneOSX/DefaultPackage/2/";
 
     public static string CONFIG_HTTP_ORIGIN = "";
 

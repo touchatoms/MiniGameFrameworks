@@ -35,7 +35,8 @@ internal class FsmInitializePackage : IStateNode
         var package = YooAssets.TryGetPackage(packageName);
         if (package == null)
             package = YooAssets.CreatePackage(packageName);
-
+        
+        YooAssets.SetDefaultPackage(package);
         // 编辑器下的模拟模式
         InitializationOperation initializationOperation = null;
         if (playMode == EPlayMode.EditorSimulateMode)

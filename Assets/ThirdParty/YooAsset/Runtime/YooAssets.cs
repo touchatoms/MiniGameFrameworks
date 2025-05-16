@@ -210,7 +210,6 @@ namespace YooAsset
             OperationSystem.StartOperation(string.Empty, operation);
         }
 
-
         private static ResourcePackage GetPackageInternal(string packageName)
         {
             foreach (var package in _packages)
